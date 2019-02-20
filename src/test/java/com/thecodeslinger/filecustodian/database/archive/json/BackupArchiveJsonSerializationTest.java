@@ -70,7 +70,7 @@ public class BackupArchiveJsonSerializationTest {
                 FULL.text, INSTANT_FULL);
 
         // When
-        BackupArchive archive = mapper.readValue(json,  BackupArchive.class);
+        BackupArchive archive = mapper.readValue(json, BackupArchive.class);
         
         // Then
         assertThat(archive.getType()).isEqualTo(FULL);
@@ -87,7 +87,7 @@ public class BackupArchiveJsonSerializationTest {
                 INCREMENTAL.text, INSTANT_INCR, FULL_ARCHIVE_NAME);
 
         // When
-        BackupArchive archive = mapper.readValue(json,  BackupArchive.class);
+        BackupArchive archive = mapper.readValue(json, BackupArchive.class);
         
         // Then
         assertThat(archive.getType()).isEqualTo(INCREMENTAL);

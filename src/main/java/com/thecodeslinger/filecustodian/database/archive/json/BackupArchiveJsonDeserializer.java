@@ -48,13 +48,13 @@ public class BackupArchiveJsonDeserializer extends StdDeserializer<BackupArchive
         ObjectCodec mapper = parser.getCodec();
         JsonNode json = mapper.readTree(parser);
         
-        JsonNode typeNode = json.get(BACKUP_ARCHIVE_TYPE);
-        JsonNode createdNode = json.get(BACKUP_ARCHIVE_CREATED);
-        JsonNode previousNode = json.get(BACKUP_ARCHIVE_PREVIOUS);
+        var typeNode = json.get(BACKUP_ARCHIVE_TYPE);
+        var createdNode = json.get(BACKUP_ARCHIVE_CREATED);
+        var previousNode = json.get(BACKUP_ARCHIVE_PREVIOUS);
         
         if (nodesContainValues(typeNode, createdNode)) {
-            Type type = Type.of(typeNode.asText());
-            Instant created = Instant.parse(createdNode.asText().replace('_', ':'));
+            var type = Type.of(typeNode.asText());
+            var created = Instant.parse(createdNode.asText().replace('_', ':'));
             
             String previous = null;
             if (nodesContainValues(previousNode)) {

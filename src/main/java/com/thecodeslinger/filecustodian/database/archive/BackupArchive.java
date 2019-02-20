@@ -43,7 +43,7 @@ public class BackupArchive {
          *      If {@code text} is unknown.
          */
         public static Type of(String text) {
-            Optional<Type> found = Arrays.stream(values())
+            var found = Arrays.stream(values())
                     .filter(v -> v.text.equalsIgnoreCase(text))
                     .findFirst();
             return found.orElseThrow(() -> new IllegalArgumentException(
@@ -56,6 +56,7 @@ public class BackupArchive {
         }
     }
     
+    private static final String NAME_FORMAT = "%s_%s";
     private Type type;
     private Instant created;
     private String previous;
@@ -148,9 +149,8 @@ public class BackupArchive {
     }
     
     public String getName() {
-        DateTimeFormatter format = DateTimeFormatter.ISO_INSTANT;
-        String isoInstantString = format.format(created).replace(':', '_');
-        return String.format("%s_%s", type.text, isoInstantString);
+        var isoInstantString = DateTimeFormatter.ISO_INSTANT.format(created);
+        return String.format(NAME_FORMAT, type.text, isoInstantString.replace(':', '_'));
     }
     
     public String getPrevious() {
@@ -173,7 +173,7 @@ public class BackupArchive {
         if (!(obj instanceof BackupArchive)) {
             return false;
         }
-        BackupArchive other = (BackupArchive) obj;
+        var other = (BackupArchive) obj;
         return Objects.equals(created, other.created) && Objects.equals(previous, other.previous) 
                 && type == other.type;
     }
