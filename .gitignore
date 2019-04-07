@@ -29,5 +29,8 @@ hs_err_pid*
 .metadata/
 .settings/
 
+# IntelliJ IDEA files
+.idea/
+
 # macOS
 .DS_Store
